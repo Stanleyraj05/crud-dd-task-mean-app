@@ -1,4 +1,4 @@
-# backend.Dockerfile
+# backend/Dockerfile
 
 # Use an official Node.js runtime as a parent image
 FROM node:18-alpine
@@ -7,13 +7,13 @@ FROM node:18-alpine
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json to leverage Docker cache
-COPY backend/package*.json ./
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
 
 # Bundle app source
-COPY backend/ .
+COPY . .
 
 # Your app binds to port 3000, so expose it
 EXPOSE 3000
