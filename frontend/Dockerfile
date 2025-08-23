@@ -9,7 +9,7 @@ COPY frontend/package*.json ./
 
 RUN npm install
 
-COPY frontend/ .
+COPY . .
 
 # Build the application for production
 RUN npm run build
