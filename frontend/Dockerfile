@@ -5,7 +5,7 @@ FROM node:18-alpine AS build
 
 WORKDIR /usr/src/app
 
-COPY frontend/package*.json ./
+COPY /package*.json ./
 
 RUN npm install
 
@@ -18,8 +18,7 @@ RUN npm run build
 FROM nginx:1.23-alpine
 
 # Copy the build output from the 'build' stage
-COPY --from=build /usr/src/app/dist/crud-dd-task /usr/share/nginx/html
-
+COPY --from=build /usr/src/app/dist/angular-15-crud /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
