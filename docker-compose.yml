@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: mean_app_backend
     ports:
-      - "3001:3000" # Host port 3001 -> Container port 3000
+      - "3001:3000"
     environment:
       - DB_URL=mongodb://mongo:27017/crud-dd-task
     depends_on:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: mean_app_frontend
     ports:
-      - "8081:80" # Host port 8081 -> Container port 80
+      - "8081:80"
     depends_on:
       - backend
     networks:
