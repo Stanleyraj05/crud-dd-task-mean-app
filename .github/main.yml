@@ -2,7 +2,7 @@ name: CI/CD Pipeline for MEAN App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: main
 
 jobs:
   build-and-push:
