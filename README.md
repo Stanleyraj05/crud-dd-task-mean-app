@@ -135,27 +135,29 @@ The frontend is an Angular application that communicates with the backend API.
 2.  **Add Server Block Configuration:**
     ```nginx
     server {
-        listen 8088;
-        server_name 44.211.126.143;
+    listen 8088;
+    server_name 44.211.126.143;
 
-        # Route root traffic to the frontend container
-        location / {
-            proxy_pass http://localhost:8081;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
-
-        # Route API calls to the backend container
-        location /api/ {
-            proxy_pass http://localhost:3001/;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
+    # Route root traffic to the frontend container
+    location / {
+        proxy_pass http://localhost:8081;
+        try_files $uri $uri/ /index.html;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
+
+    # Route API calls to the backend container
+    location /api/ {
+        proxy_pass http://localhost:3001/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
     ```
 
 3.  **Test and Restart Nginx:**
